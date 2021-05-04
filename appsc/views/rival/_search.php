@@ -4,9 +4,9 @@
  * FIXME: 生成根据 race 查询 unit id 数组的 ajax 接口,并在 race/id 之间建立依赖关系
  */
 
-use app\helpers\DepDropHelper;
-use app\helpers\DropDownHelper;
-use app\models\Unit;
+use appsc\helpers\DepDropHelper;
+use appsc\helpers\DropDownHelper;
+use appsc\models\Unit;
 use kartik\depdrop\DepDrop;
 use kartik\form\ActiveForm;
 use yii\helpers\ArrayHelper;

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use app\models\Unit;
+use appsc\models\Unit;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UnitSearch */

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Unit;
+use appsc\models\Unit;
 use kartik\detail\DetailView;
 use yii\helpers\Html;
 use yii\helpers\Url;

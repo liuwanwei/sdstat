@@ -1,7 +1,7 @@
 <?php
 
-use app\helpers\BonusHelper;
-use app\models\Unit;
+use appsc\helpers\BonusHelper;
+use appsc\models\Unit;
 use yii\helpers\Html;
 use yii\grid\GridView;
 

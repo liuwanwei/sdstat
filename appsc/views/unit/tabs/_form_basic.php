@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Unit;
+use appsc\models\Unit;
 ?>
 
 <?= $form->field($model, 'race')->dropDownList([0 => 'P', 1 => 'T', 2 => 'Z']) ?>

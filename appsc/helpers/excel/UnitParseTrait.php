@@ -2,8 +2,8 @@
 
 namespace app\helpers\excel;
 
-use app\models\Damage;
-use app\models\Unit;
+use appsc\models\Damage;
+use appsc\models\Unit;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Yii;
 
