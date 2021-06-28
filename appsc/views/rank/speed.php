@@ -10,7 +10,7 @@
 
 
 \appsc\assets\EChartsAsset::register($this);
-// $this->registerJs('js/echarts.min.js', $this::POS_HEAD);
+$this->title = '星际兵种速度排行';
 ?>
 
 <?= $this->render('_search', ['model' => $searchModel]) ?>

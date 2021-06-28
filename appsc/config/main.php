@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-sc',
+    'name' => '星际基本属性',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'appsc\controllers',
     'defaultRoute' => 'unit/index',
@@ -44,6 +45,9 @@ return [
             'rules' => [
             ],
         ],
+        'formatter' => [
+            'nullDisplay' => '',
+        ]
     ],
     'params' => $params,
 ];
