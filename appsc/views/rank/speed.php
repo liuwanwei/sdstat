@@ -9,7 +9,7 @@
 // https://echarts.apache.org/v4/examples/zh/editor.html?c=bar-y-category-stack
 
 
-\app\assets\EChartsAsset::register($this);
+\appsc\assets\EChartsAsset::register($this);
 // $this->registerJs('js/echarts.min.js', $this::POS_HEAD);
 ?>
 

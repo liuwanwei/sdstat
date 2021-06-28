@@ -52,11 +52,11 @@ AppAsset::register($this);
                     ['label' => TApp('Speed'), 'url' => ['/rank/speed']],
                 ]
             ],
-            ['label' => TApp('Import'), 'url' => ['/unit/import']],
             ['label' => TApp('Units'), 'url' => ['/unit/index']],
+            ['label' => TApp('Import'), 'url' => ['/unit/import']],            
             // ['label' => TApp('Damage'), 'url' => ['/damage/index']],            
             // ['label' => TApp('Rivals'), 'url' => ['/rival/index']],
-            ['label' => TApp('Buildings'), 'url' => ['/building/index']],
+            // ['label' => TApp('Buildings'), 'url' => ['/building/index']],
             ['label' => TApp('Backups'), 'url' => ['/db-manager']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
