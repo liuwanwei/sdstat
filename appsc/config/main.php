@@ -10,6 +10,7 @@ return [
     'id' => 'app-sc',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'appsc\controllers',
+    'defaultRoute' => 'unit/index',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
