@@ -18,6 +18,8 @@ function Trans($options) {
 }
 
 return [
+    'timeZone' => 'Asia/Shanghai',
+    'language' => 'zh-CN',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

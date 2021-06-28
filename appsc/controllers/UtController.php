@@ -1,19 +1,23 @@
 <?php
+/**
+ * 从 scstat 项目的 UnitController 改名而来。
+ */
 
 namespace appsc\controllers;
 
 use Yii;
-use appsc\helpers\excel\DataParser;
 use appsc\models\Unit;
 use appsc\models\UnitSearch;
+use appsc\helpers\DropDownHelper;
+use appsc\models\BonusSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UnittController implements the CRUD actions for Unit model.
+ * UnitController implements the CRUD actions for Unit model.
  */
-class UnittController extends Controller
+class UtController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -22,7 +26,7 @@ class UnittController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -38,6 +42,7 @@ class UnittController extends Controller
     {
         $searchModel = new UnitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // $dataProvider->query->orderBy(['createdAt' => SORT_DESC]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -53,7 +58,27 @@ class UnittController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        // return messages on update of record
+
+        // 由于使用了 kartik/detail-view，支持 edit 模式，所以在这里 save()
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // Yii::$app->session->setFlash('kv-detail-success', 'Success Message');
+        }
+
+        $searchModel = new BonusSearch();
+        $searchModel->unitId = $id;
+        $dataProvider = $searchModel->search([]);
+        
         return $this->render('view', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionView2($id)
+    {
+        return $this->render('dialog_view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -72,6 +97,22 @@ class UnittController extends Controller
         }
 
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * 对话框方式被 unit/index 界面上按钮弹出
+     */
+    public function actionDCreate()
+    {
+        $model = new Unit();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return 'success';
+        }
+
+        return $this->renderAjax('_form', [
             'model' => $model,
         ]);
     }
@@ -103,11 +144,16 @@ class UnittController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $from = null)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if (empty($from)) {
+            return $this->redirect(['index']);
+        }else if ($from == 'index'){
+            // 在 index action 中的列表中删除，重载列表本身
+            return $this->redirect(Yii::$app->request->referrer);
+        }        
     }
 
     /**
@@ -123,17 +169,18 @@ class UnittController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    public function actionImport(){
-        $parser = new DataParser();
-        $count = $parser->extract();
-        \Yii::$app->session->setFlash('success', "共解析 {$count} 个单位");
-        $this->redirect(\Yii::$app->request->referrer);
-    }
+    // DepDrop 方式查询数据
+    public function actionSearch(){
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $units = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            $units = Unit::findAll(['race' => $parents[0]]);            
+        }
 
-    public function actionSpeedRank(){
-        
+        return DropDownHelper::makeDepDropQueryResult($units);
     }
 }

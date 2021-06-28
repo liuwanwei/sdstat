@@ -1,16 +1,51 @@
 <?php
 
+use app\helpers\BonusHelper;
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Unit */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Units'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => TApp($model->raceString(true)), 'url' => ['index', 'race' => $model->race]];
+$this->params['breadcrumbs'][] = ['label' => 'Units', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-// BonusAsset::register($this);
 ?>
+<div class="unit-view">
 
-<?= $this->render('_editable_view', ['model' => $model, 'mode' => 'view']) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<?= $this->render('_bonus_index', ['model' => $model, 'dataProvider' => $dataProvider]) ?>
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'race',
+            'name',
+            'type',
+            'force',
+            'mineCost',
+            'gasCost',
+            'timeCost',
+            'unitCost',
+            'hp',
+            'shield',
+            'armor',
+            'energy',
+            [
+                'attribute' => 'sight',
+                'value' => BonusHelper::bonusRange($model, 'sight'),
+            ],
+            // 'sightBonus',
+            [
+                'attribute' => 'speed',
+                'value' => BonusHelper::bonusRange($model, 'speed'),
+            ],
+            // 'speed',
+            // 'speedBonus',
+            // 'createdAt',
+            'updatedAt',
+        ],
+    ]) ?>
+
+</div>

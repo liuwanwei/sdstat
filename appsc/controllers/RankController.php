@@ -2,8 +2,7 @@
 
 namespace appsc\controllers;
 
-use appsc\models\Unit;
-use app\models\UnitSearch;
+use appsc\models\UnitSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
