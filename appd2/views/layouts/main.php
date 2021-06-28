@@ -39,7 +39,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => [
             ['label' => TApp('Rune Owneds'), 'url' => ['rune-owned/index']],
-            ['label' => TApp('Rune Search'), 'url' => ['rune-word/index']],
+            // ['label' => TApp('Rune Search'), 'url' => ['rune-word/index']],
         ],
     ]);
     NavBar::end();
