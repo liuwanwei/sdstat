@@ -1,15 +1,13 @@
 <?php
 
-use yii\bootstrap\Modal;
+use common\assets\EuiAsset;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RuneWordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Rune Search');
-// $this->params['breadcrumbs'][] = $this->title;
-
+$this->title = T('Rune Search');
 
 $js = <<< JS
 $(function(){
@@ -41,6 +39,8 @@ $(function(){
 })
 JS;
 $this->registerJs($js);
+
+EuiAsset::register($this);
 ?>
 
 <style type="text/css">
@@ -158,17 +158,15 @@ $this->registerJs($js);
         ],      
         'level',  
         'version',
-        // [
-        //     'class' => 'yii\grid\ActionColumn',
-        //     'template' => '{view}'
-        // ],
     ],
 ]); ?>
 
 </div>
 
 <?php
-\yii\bootstrap\Modal::begin([
+use yii\bootstrap\Modal;
+
+Modal::begin([
     'id' => 'details-modal',
     'size' => Modal::SIZE_DEFAULT,
     'header' => null,
@@ -177,5 +175,5 @@ $this->registerJs($js);
         'class' => 'modal', // 消除 fade 效果
     ],
 ]);
-\yii\bootstrap\Modal::end();
+Modal::end();
 ?>

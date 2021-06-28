@@ -5,8 +5,12 @@
  * @param string $name
  * @return string
  */
-function TApp($name){
-    return \Yii::t('app', $name);
+function TApp($name, $params = []){
+    return \Yii::t('app', $name, $params);
+}
+
+function T($name, $params = []){
+    return \Yii::t('app', $name, $params);
 }
 
 function Trans($options) {

@@ -1,7 +1,7 @@
 <?php
 
+use common\assets\EuiAsset;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RuneOwnedSearch */
@@ -9,6 +9,8 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Rune Owneds');
 $this->params['breadcrumbs'][] = $this->title;
+
+EuiAsset::register($this);
 ?>
 <div class="rune-owned-index">
 
@@ -19,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     
     <div class='row'>        
-        <?= $this->render('_index', ['model' => $searchModel, 'dataProvider' => $dataProvider, 'editable' => true]) ?>            
+        <?= $this->render('_kartik_editable_index', ['model' => $searchModel, 'dataProvider' => $dataProvider, 'editable' => true]) ?>            
     </div>
     
 
