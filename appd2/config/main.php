@@ -10,8 +10,13 @@ return [
     'id' => 'app-d2',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'appd2\controllers',
+    'defaultRoute' => 'rune-owned/index',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-appd2',
@@ -37,14 +42,14 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];

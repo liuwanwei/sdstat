@@ -1,6 +1,6 @@
 <?php
 
-namespace app\helpers\excel;
+namespace appsc\helpers\excel;
 
 use appsc\models\Damage;
 use appsc\models\Unit;

@@ -1,5 +1,5 @@
 <?php
-namespace app\helpers\excel;
+namespace appsc\helpers\excel;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;

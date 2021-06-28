@@ -1,14 +1,15 @@
 <?php
-namespace appsc\helpers\excel;
+namespace appd2\helpers;
 
 use yii\base\Exception;
+use appsc\helpers\excel\ExcelParser;
 
-class DataParser extends ExcelParser{
+class RuneParser extends ExcelParser{
 
-    use UnitParseTrait;
+    use RuneWordParserTrait;
+    use RuneParserTrait;
 
     // 数据文件名字，确保放置在当前文件相同目录
-    const SC_EXCEL = "ScStats.xlsx";
     const RUNEWORDS_EXCEL = 'd2-runewords.xlsx';
 
     /**
@@ -25,15 +26,20 @@ class DataParser extends ExcelParser{
         return $file;
     }
 
-    public function extract(){
-        $inputFileName = $this->_checkFile(self::SC_EXCEL);        
-
-        // $worksheet = $this->getWorkSheet($inputFileName);
+    public function extractRuneWords(){
+        $inputFileName = $this->_checkFile(self::RUNEWORDS_EXCEL);
         $spreadsheet = $this->getSpreadSheet($inputFileName);
-
         $spreadsheet->setActiveSheetIndex(0);
         $worksheet = $spreadsheet->getActiveSheet();
-        return $this->extractUnit($worksheet);
+        return $this->extractRWs($worksheet);
+    }
+
+    public function extractRunes(){
+        $inputFileName = $this->_checkFile(self::RUNEWORDS_EXCEL);
+        $spreadsheet = $this->getSpreadSheet($inputFileName);
+        $spreadsheet->setActiveSheetIndex(1);
+        $worksheet = $spreadsheet->getActiveSheet();
+        return $this->extractRs($worksheet);
     }
 }
 
