@@ -56,7 +56,7 @@ class RuneWord extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Rune Word Name'),
             'cnName' => Yii::t('app', 'Cn Name'),
             'equipments' => Yii::t('app', 'Equipments'),
             'category' => Yii::t('app', 'Category'),
