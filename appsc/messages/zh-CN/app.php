@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'Login' => '登录',
+    'Admin' => '管理',
+
     'Units' => '单位',
     'P' => '神族',
     'T' => '人族',
@@ -86,8 +89,9 @@ return [
 
     'Mine Cost' => '矿',
     'Gas Cost' => '气',
-    'Time Cost' => '建造',
+    'Time Cost' => '建造时间',
     'Unit Cost' => '单位',
+    'Resource Cost' => '价格',
 
     'Search' => '搜索',
     'Rank' => '排行榜',
@@ -105,7 +109,7 @@ return [
     'Shuttle' => '穿梭机',
     'Scout' => '哒哒哒',
     'Carrier' => '航母',
-    'Interceptor' => '拦截机',
+    'Interceptor' => '航母小飞机',
     'Corsair' => '海盗船',
     'SCV' => 'SCV',
     'Marine' => '枪兵',

@@ -1,6 +1,6 @@
 <?php
 
-use app\helpers\BonusHelper;
+use appsc\helpers\BonusHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Unit */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Units', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => T('Units'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

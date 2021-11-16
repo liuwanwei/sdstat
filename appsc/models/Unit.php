@@ -107,4 +107,19 @@ class Unit extends NamedActiveRecord
     public function getDamages(){
         return $this->hasMany(Damage::class, ['unitId' => 'id'])->orderBy(['scope' => SORT_ASC]);
     }
+
+    public function buildResCost(){
+        $mine = '/img/30px-Scr-minerals.png';
+        $gas = '/img/30px-Scr-gas-t.png';
+        $cost = "<img src=$mine width=20 height=20> {$this->mineCost}";
+        if ($this->gasCost) {
+            $cost .= " <img src=$gas width=20 height=20> {$this->gasCost}"; 
+        }
+        return $cost;
+    }
+
+    public function buildTimeCost(){
+        $time = '/img/DurationIcon.gif';
+        return "<img src=$time width=20 height=20> $this->timeCost";
+    }
 }

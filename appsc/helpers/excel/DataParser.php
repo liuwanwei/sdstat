@@ -9,7 +9,6 @@ class DataParser extends ExcelParser{
 
     // 数据文件名字，确保放置在当前文件相同目录
     const SC_EXCEL = "ScStats.xlsx";
-    const RUNEWORDS_EXCEL = 'd2-runewords.xlsx';
 
     /**
      * 检查星际争霸数据 Excel 文件是否存在

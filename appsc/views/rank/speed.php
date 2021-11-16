@@ -20,10 +20,26 @@ $this->title = '星际兵种速度排行';
 </p>
 
 <script type="text/javascript">
-    var names = JSON.parse('<?php echo $names ?>')
-    var baseValues = JSON.parse('<?php echo $baseValues ?>')
-    var bonusValues = JSON.parse('<?php echo $bonusValues ?>')
-    createRank(names, baseValues, bonusValues)
+    $(function() {
+        // 选择下拉单元后直接提交
+        $('#mode').on('change', function(){
+            submitSearchForm();
+        });
+
+        $('#force').on('change', function(){
+            submitSearchForm();
+        });
+
+        $('#race').on('change', function() {
+            submitSearchForm();
+        })
+
+        // 生成排行榜
+        var names = JSON.parse('<?php echo $names ?>')
+        var baseValues = JSON.parse('<?php echo $baseValues ?>')
+        var bonusValues = JSON.parse('<?php echo $bonusValues ?>')
+        createRank(names, baseValues, bonusValues)
+    });
 
     function createRank(names, baseValues, bonusValues){
         var myChart = echarts.init(document.getElementById('main'))
@@ -39,7 +55,7 @@ $this->title = '星际兵种速度排行';
                 }
             },
             legend: {
-                data:['初始速度', '升级速度']
+                data:['原始速度', '升级后速度']
             },
             grid: {
                 left: '3%',
@@ -83,5 +99,9 @@ $this->title = '星际兵种速度排行';
         }
 
         myChart.setOption(option)
+    }
+
+    function submitSearchForm(){
+        $('#speed-search-form').submit()
     }
 </script>

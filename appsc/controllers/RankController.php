@@ -9,7 +9,6 @@ use yii\web\Controller;
 class RankController extends Controller{
 
     public function actionSpeed(){
-        // $models = Unit::find()->select('name, speedBonus')->orderBy(['speedBonus' => SORT_DESC])->asArray()->all();
         $searchModel = new UnitSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
         $query = $dataProvider->query;

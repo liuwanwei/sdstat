@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use appsc\assets\AppAsset;
+use appsc\helpers\MenuHelper;
 
 AppAsset::register($this);
 ?>
@@ -37,40 +38,7 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            // [
-            //     'label' => TApp('Rune Words'),
-            //     'items' => [                    
-            //         ['label' => TApp('Runes'), 'url' => ['/rune/index']],
-            //         ['label' => TApp('Rune Owneds'), 'url' => ['rune-owned/index']],
-            //         ['label' => TApp('Rune Words'), 'url' => ['/rune-word/index']],
-            //     ]
-            // ],
-            [
-                'label' => TApp('Rank'),
-                'items' => [
-                    ['label' => TApp('Speed'), 'url' => ['/rank/speed']],
-                ]
-            ],
-            ['label' => TApp('Units'), 'url' => ['/unit/index']],
-            ['label' => TApp('Import'), 'url' => ['/unit/import']],            
-            // ['label' => TApp('Damage'), 'url' => ['/damage/index']],            
-            // ['label' => TApp('Rivals'), 'url' => ['/rival/index']],
-            // ['label' => TApp('Buildings'), 'url' => ['/building/index']],
-            ['label' => TApp('Backups'), 'url' => ['/db-manager']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => MenuHelper::getMenus(),
     ]);
     NavBar::end();
     ?>

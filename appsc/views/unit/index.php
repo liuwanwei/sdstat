@@ -42,13 +42,13 @@ $this->registerJs($js);
         'columns' => [
             // ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'race',
+            // 'id',            
             [
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($model){
-                    return Html::a(TApp($model->name), ['view', 'id' => $model->id]);
+                    $title = "{$model->race} " . TApp($model->name) . " ($model->unitCost)";
+                    return Html::a($title, ['view', 'id' => $model->id]);
                 }
             ],
             // 'typeNAME',
@@ -65,13 +65,34 @@ $this->registerJs($js);
                     return Trans(Unit::FORCES)[$model->force];
                 }
             ],
-            'mineCost',
-            'gasCost',
-            'timeCost',
-            'unitCost',
-            'hp',            
-            'armor',
-            'shield',
+            [
+                'label' => T('Resource Cost'),
+                'format' => 'raw',
+                'value' => function($model){
+                    return $model->buildResCost();
+                }
+            ],
+            [
+                'attribute' => 'timeCost',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->buildTimeCost();
+                }
+            ],
+            // 'unitCost',
+            // 'hp',
+            [
+                'label' => T('Hp'),
+                'value' => function($model) {
+                    if ($model->shield) {
+                        return "{$model->shield}/{$model->hp}";
+                    }else{
+                        return $model->hp;
+                    }
+                }
+            ],
+            // 'armor',
+            // 'shield',
             // 'energy',
             [
                 'attribute' => 'sight',

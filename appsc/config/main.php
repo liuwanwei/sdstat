@@ -19,7 +19,7 @@ return [
             'csrfParam' => '_csrf-appsc',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'appsc\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-appsc', 'httpOnly' => true],
         ],
