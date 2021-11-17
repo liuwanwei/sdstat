@@ -127,8 +127,9 @@ $this->registerJs($js);
 
     <?php
     \yii\bootstrap\Modal::begin([
-        'id' => 'damage-modal',
-        'header' => '<h4 id="modal-header">攻击伤害</h4>'
+        'id' => 'damage-modal',        
+        'header' => '<h4 id="modal-header">攻击伤害</h4>',
+        'options' => ['class' => 'collapse modal',],
     ]);
     \yii\bootstrap\Modal::end();
     ?>

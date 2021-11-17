@@ -12,7 +12,8 @@ class MenuHelper{
 
         $menus = [
             ['label' => TApp('Units'), 'url' => ['/unit/index']],
-            ['label' => TApp('Speed'), 'url' => ['/rank/speed']],           
+            ['label' => TApp('Speed'), 'url' => ['/rank/speed'], 'linkOptions' => ['target' => 'blank']],
+            ['label' => '伤害计算', 'url' => ['/img/星际争霸伤害计算.pdf'], 'linkOptions' => ['target' => 'blank']],
         ];
         
         if (! $isGuest) {

@@ -37,5 +37,8 @@ define('BONUS_SCOPES', [
 // define('BONUS_SIGHT',             20);
 // define('BONUS_SPEED',             21);
 
+define('ICON_EXPLOSIVE', '/img/Explosive.png');
+define('ICON_CONCUSSIVE', '/img/Concussive.png');
+define('ICON_SPLASH', '/img/Splash.png');
 
 ?>

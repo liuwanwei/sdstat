@@ -40,7 +40,7 @@ return [
     'Stride' => '升级提升',
     'Base Damage' => '初始伤害',
     'Times' => '打击次数',
-    'Dps' => '每秒伤害',
+    'Dps' => '每秒伤害(DPS)',
 
     'Explosive' => '爆炸式伤害',
     'Concussive' => '震荡式伤害',
