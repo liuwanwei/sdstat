@@ -746,6 +746,27 @@ body{ box-sizing: border-box;
 }
 
 </style><script>window.MathJax = {     tex: { tags: 'ams' },     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>document.addEventListener('DOMContentLoaded', function(event) {window.mweb_mathjax_ready_val = 'yes';})</script></head><body><div id='markdown_content' class='markdown-body'><h1><a id="%E6%98%9F%E9%99%85%E4%BA%89%E9%9C%B8%E4%BC%A4%E5%AE%B3%E8%AE%A1%E7%AE%97" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>星际争霸伤害计算</h1>
+<ul>
+<li><a href="#%E6%98%9F%E9%99%85%E4%BA%89%E9%9C%B8%E4%BC%A4%E5%AE%B3%E8%AE%A1%E7%AE%97">星际争霸伤害计算</a>
+<ul>
+<li><a href="#1%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6">1. 前提条件</a>
+<ul>
+<li><a href="#1-1%E4%BC%A4%E5%AE%B3%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6">1.1 伤害产生条件</a></li>
+<li><a href="#1-2%E8%AE%A1%E7%AE%97%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D">1.2 计算参数介绍</a></li>
+</ul>
+</li>
+<li><a href="#2%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B">2. 计算过程</a>
+<ul>
+<li><a href="#2-1%E5%9F%BA%E7%A1%80%E4%BC%A4%E5%AE%B3">2.1 基础伤害</a></li>
+<li><a href="#2-2%E9%9C%87%E8%8D%A1%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F">2.2 震荡式攻击消减</a></li>
+<li><a href="#2-3%E7%88%86%E7%82%B8%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F">2.3 爆炸式攻击消减</a></li>
+<li><a href="#2-4%E5%AE%8C%E6%95%B4%E4%BC%A4%E5%AE%B3%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F">2.4 完整伤害计算公式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 <h2><a id="1%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 前提条件</h2>
 <h3><a id="1-1%E4%BC%A4%E5%AE%B3%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 伤害产生条件</h3>
 <p>假设兵种 X 攻击 Y，只有下面两种情况下会产生伤害：</p>
