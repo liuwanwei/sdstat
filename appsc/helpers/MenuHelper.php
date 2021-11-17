@@ -12,8 +12,19 @@ class MenuHelper{
 
         $menus = [
             ['label' => TApp('Units'), 'url' => ['/unit/index']],
-            ['label' => TApp('Speed'), 'url' => ['/rank/speed'], 'linkOptions' => ['target' => 'blank']],
-            ['label' => '伤害计算', 'url' => ['/damage.html'], 'linkOptions' => ['target' => 'blank']],
+            [
+                'label' => '排行榜',
+                'items' => [
+                    ['label' => TApp('Speed Rank'), 'url' => ['/rank/speed'], 'linkOptions' => ['target' => 'blank']],
+                ],
+            ],
+            [
+                'label' => '星际知识',
+                'items' => [
+                    ['label' => '伤害计算', 'url' => ['/doc/damage.html'], 'linkOptions' => ['target' => 'blank']],
+                    ['label' => '韩国选手ID', 'url' => ['/doc/players.html'], 'linkOptions' => ['target' => 'blank']]
+                ],
+            ],
         ];
         
         if (! $isGuest) {

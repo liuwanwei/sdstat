@@ -65,6 +65,7 @@ return [
     'Sight' => '视野',
     'Speed' => '移动速度',
     'Speed Bonus' => '移动速度',
+    'Speed Rank' => '移动速度排名',
 
     'Both' => '兵种',
     'Ground' => '陆军',
