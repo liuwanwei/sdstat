@@ -28,7 +28,7 @@ class MenuHelper{
         ];
         
         if (! $isGuest) {
-            $menus[] = ['label' => TApp('Import'), 'url' => ['/unit/import']];
+            $menus[] = ['label' => TApp('Import'), 'url' => ['/unit/menu']];
             $menus[] = ['label' => TApp('Backups'), 'url' => ['/db-manager']];
         }
             

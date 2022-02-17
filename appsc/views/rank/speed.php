@@ -8,6 +8,7 @@
 // bar 图例子
 // https://echarts.apache.org/v4/examples/zh/editor.html?c=bar-y-category-stack
 
+extract($data);
 
 \appsc\assets\EChartsAsset::register($this);
 $this->title = '星际兵种速度排行';

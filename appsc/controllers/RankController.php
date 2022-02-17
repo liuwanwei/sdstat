@@ -3,16 +3,51 @@
 namespace appsc\controllers;
 
 use appsc\models\UnitSearch;
+use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class RankController extends Controller{
 
-    public function actionSpeed(){
+    public function actionSpeed(){        
         $searchModel = new UnitSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        
         $query = $dataProvider->query;
 
+        $data = $this->_checkGetData($query);
+
+        return $this->render('speed', [
+            'searchModel' => $searchModel,
+            'data' => $data,       
+        ]);
+    }
+
+    private function _checkGetData($query){
+        $cache = Yii::$app->cache;
+        if ($cache == null) {
+            return $this->_fetchData($query);
+        }
+
+        $data = $cache->getOrSet($this->_getKey(), function($cache) use ($query){
+            return $this->_fetchData($query);
+        });
+
+        return $data;
+    }
+
+    private function _getKey(){
+        $request = Yii::$app->request;
+        $race = $request->get('race');
+        $force = $request->get('force');
+        $mode = $request->get('mode');
+
+        $key = "{$race}-{$force}-{$mode}";
+        return $key;
+    }
+
+    private function _fetchData(ActiveQuery $query){
         $mode = \Yii::$app->request->get('mode');
         if ($mode == null || $mode == '0') {
             $sortColumn = 'speed';
@@ -39,12 +74,11 @@ class RankController extends Controller{
             }            
         }
 
-        return $this->render('speed', [
-            'searchModel' => $searchModel,
+        return [
             'names' => json_encode($names),
             'baseValues' => json_encode($baseValues),
             'bonusValues' => json_encode($differences),
-        ]);
+        ];
     }
 }
 

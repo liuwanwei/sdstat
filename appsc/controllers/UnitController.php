@@ -8,6 +8,7 @@ use Yii;
 use appsc\helpers\excel\DataParser;
 use appsc\models\Unit;
 use appsc\models\UnitSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,11 +25,21 @@ class UnitController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['menu', 'import', 'flush-cache'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -128,10 +139,23 @@ class UnitController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    // 显示操作菜单，包括数据导入，清除缓存等入口
+    public function actionMenu(){
+        return $this->render('menu');
+    }
+
+    // 从 excel 中倒入数据
     public function actionImport(){
         $parser = new DataParser();
         $count = $parser->extract();
         \Yii::$app->session->setFlash('success', "共解析 {$count} 个单位");
+        $this->redirect(\Yii::$app->request->referrer);
+    }
+
+    // 清除缓存，memecache 或文件缓存，whatever
+    public function actionFlushCache(){
+        Yii::$app->cache->flush();
+        \Yii::$app->session->setFlash('success', "清除完成");
         $this->redirect(\Yii::$app->request->referrer);
     }
 
