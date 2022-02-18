@@ -1,4 +1,7 @@
 <?php
+
+use yii\console\controllers\MigrateController;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -19,7 +22,14 @@ return [
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
+        ],
+        'migrate' => [
+            'class' => MigrateController::class,
+            'migrationNamespaces' => [
+                'app\migrations',
+                'appsc\migrations',
+            ],
+        ]
     ],
     'components' => [
         'log' => [
