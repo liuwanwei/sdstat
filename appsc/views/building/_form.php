@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Building */
+/* @var $model appsc\models\Building */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -12,15 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'race')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'mineCost')->textInput() ?>
 
     <?= $form->field($model, 'gasCost')->textInput() ?>
 
     <?= $form->field($model, 'timeCost')->textInput() ?>
+
+    <?= $form->field($model, 'hp')->textInput() ?>
+
+    <?= $form->field($model, 'shield')->textInput() ?>
+
+    <?= $form->field($model, 'armor')->textInput() ?>
 
     <?= $form->field($model, 'createdAt')->textInput() ?>
 

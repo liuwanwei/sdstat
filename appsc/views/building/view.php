@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Building */
+/* @var $model appsc\models\Building */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Buildings'), 'url' => ['index']];
@@ -30,11 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
             'race',
+            'name',
             'mineCost',
             'gasCost',
             'timeCost:datetime',
+            'hp',
+            'shield',
+            'armor',
             'createdAt',
             'updatedAt',
         ],

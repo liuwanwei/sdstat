@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\BuildingSearch */
+/* @var $searchModel appsc\models\BuildingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Buildings');
@@ -22,16 +22,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'name',
+            'id',
             'race',
+            'name',
             'mineCost',
             'gasCost',
             //'timeCost:datetime',
+            //'hp',
+            //'shield',
+            //'armor',
             //'createdAt',
             //'updatedAt',
 

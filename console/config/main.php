@@ -26,8 +26,20 @@ return [
         'migrate' => [
             'class' => MigrateController::class,
             'migrationNamespaces' => [
-                'app\migrations',
+                // TODO: 记到文档里：根目录下的 migrations 不带 namespace，都会首先读取，不用在这里设置                
+                // 'app/migrations',
                 'appsc\migrations',
+
+                // TODO: 记到文档里：要想禁用不带 namespace 的，可以设置这个属性
+                // migrationPath 的文档里写的很清楚：
+                // Migration classes located at this path should be declared without a namespace.
+                // 'migrationPath' => null
+                
+                // 所以加载顺序，首先从 migrationPath 中加载不带名字空间的 migrations，然后再去寻找名字空间里的。                
+                // 证据在：BaseMigrationController::actionUp(){}
+                //      $migrations = $this->getNewMigrations();
+                // }
+                // 在 getNewMigrations() 里可以看到加载顺序。
             ],
         ]
     ],

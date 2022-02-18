@@ -4,9 +4,10 @@ namespace appsc\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use appsc\models\Building;
 
 /**
- * BuildingSearch represents the model behind the search form of `app\models\Building`.
+ * BuildingSearch represents the model behind the search form of `appsc\models\Building`.
  */
 class BuildingSearch extends Building
 {
@@ -16,8 +17,8 @@ class BuildingSearch extends Building
     public function rules()
     {
         return [
-            [['id', 'mineCost', 'gasCost', 'timeCost'], 'integer'],
-            [['name', 'race', 'createdAt', 'updatedAt'], 'safe'],
+            [['id', 'mineCost', 'gasCost', 'timeCost', 'hp', 'shield', 'armor'], 'integer'],
+            [['race', 'name', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
 
@@ -61,12 +62,15 @@ class BuildingSearch extends Building
             'mineCost' => $this->mineCost,
             'gasCost' => $this->gasCost,
             'timeCost' => $this->timeCost,
+            'hp' => $this->hp,
+            'shield' => $this->shield,
+            'armor' => $this->armor,
             'createdAt' => $this->createdAt,
             'updatedAt' => $this->updatedAt,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'race', $this->race]);
+        $query->andFilterWhere(['like', 'race', $this->race])
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

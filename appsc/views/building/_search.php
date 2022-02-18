@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\BuildingSearch */
+/* @var $model appsc\models\BuildingSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,15 +17,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'name') ?>
-
     <?= $form->field($model, 'race') ?>
+
+    <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'mineCost') ?>
 
     <?= $form->field($model, 'gasCost') ?>
 
     <?php // echo $form->field($model, 'timeCost') ?>
+
+    <?php // echo $form->field($model, 'hp') ?>
+
+    <?php // echo $form->field($model, 'shield') ?>
+
+    <?php // echo $form->field($model, 'armor') ?>
 
     <?php // echo $form->field($model, 'createdAt') ?>
 
