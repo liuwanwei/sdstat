@@ -2,6 +2,7 @@
 
 namespace appsc\controllers;
 
+use appsc\helpers\excel\BuildingDataParser;
 use Yii;
 use appsc\models\Building;
 use appsc\models\BuildingSearch;
@@ -123,5 +124,12 @@ class BuildingController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionImport(){
+        $parser = new BuildingDataParser();
+        $count = $parser->extract();
+        \Yii::$app->session->setFlash('success', "共解析 {$count} 个建筑");
+        $this->redirect(\Yii::$app->request->referrer);
     }
 }

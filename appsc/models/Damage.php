@@ -80,4 +80,17 @@ class Damage extends NamedActiveRecord
     public function getUnit(){
         return $this->hasOne(Unit::class, ['id' => 'unitId']);
     }
+
+    public function updateCooldown($base, $bonus){
+        $this->cooldown = $base;
+        $this->cooldownBonus = $bonus;
+
+        // $this->save();
+    }
+
+    public function updateDps($base, $bonus){
+        $this->dps = $base;
+        $this->dpsBonus = $bonus;
+        // $this->save();
+    }
 }

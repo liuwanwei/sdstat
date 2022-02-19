@@ -5,7 +5,7 @@
 namespace appsc\controllers;
 
 use Yii;
-use appsc\helpers\excel\DataParser;
+use appsc\helpers\excel\UnitDataParser;
 use appsc\models\Unit;
 use appsc\models\UnitSearch;
 use yii\filters\AccessControl;
@@ -144,9 +144,13 @@ class UnitController extends Controller
         return $this->render('menu');
     }
 
-    // 从 excel 中倒入数据
+    /**
+     * 从 excel 中导入数据
+     *
+     * @return void
+     */ 
     public function actionImport(){
-        $parser = new DataParser();
+        $parser = new UnitDataParser();
         $count = $parser->extract();
         \Yii::$app->session->setFlash('success', "共解析 {$count} 个单位");
         $this->redirect(\Yii::$app->request->referrer);

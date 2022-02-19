@@ -15,14 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Building'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -31,11 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'mineCost',
             'gasCost',
-            //'timeCost:datetime',
-            //'hp',
-            //'shield',
-            //'armor',
-            //'createdAt',
+            'timeCost',
+            'hp',
+            'shield',
+            'armor',
+            // 'createdAt',
             //'updatedAt',
 
             ['class' => 'yii\grid\ActionColumn'],
