@@ -99,8 +99,8 @@ $this->registerJs($js);
                 'value' => function($model) { return BonusHelper::bonusRange($model, 'sight'); }
             ],
             // 'sightBonus',
-            'groundDamageEffect',
-            'airDamageEffect',
+            // 'groundDamageEffect',
+            // 'airDamageEffect',
             [
                 'attribute' => 'speedBonus',
                 'value' => function ($model) { return BonusHelper::bonusRange($model, 'speed'); }
