@@ -13,13 +13,16 @@ class UnitSearch extends Unit
     // 查询速度时，查询默认速度还是暴走后的速度，0基础，1暴走
     public $mode;
 
+    // 查询攻击类型时，从 groundDamageEffect 和 airDamageEffect 中搜索，两者居其一即可
+    public $damageEffect;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'type', 'force', 'mineCost', 'gasCost', 'timeCost', 'unitCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus'], 'integer'],
+            [['id', 'type', 'force', 'mineCost', 'gasCost', 'timeCost', 'unitCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus', 'damageEffect'], 'integer'],
             [['race', 'name', 'energy', 'createdAt', 'updatedAt'], 'safe'],
             [['speed', 'speedBonus'], 'number'],
             [['mode'], 'safe'],
@@ -79,9 +82,23 @@ class UnitSearch extends Unit
             'updatedAt' => $this->updatedAt,
         ]);
 
+        if (! empty($this->damageEffect)) {
+            $effect = intval($this->damageEffect);
+            if ($effect == Unit::DAMAGE_EFFECT_NORMAL){
+                // 对空对地都是普通伤害时，算作普通伤害
+                $query->andFilterWhere(['and', ['groundDamageEffect' => $effect], ['airDamageEffect' => $effect]]);
+            }else{
+                // 对空对地其中之一有特殊伤害即可
+                $query->andFilterWhere(['or', ['groundDamageEffect' => $effect], ['airDamageEffect' => $effect]]);
+            }            
+        }
+
         $query->andFilterWhere(['like', 'race', $this->race])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'energy', $this->energy]);
+
+        $sql = $query->createCommand()->getRawSql();
+        \Yii::error($sql);
 
         return $dataProvider;
     }

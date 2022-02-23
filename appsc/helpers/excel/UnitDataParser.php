@@ -12,10 +12,10 @@ use Yii;
  */
 class UnitDataParser extends DataParser
 {    
-    // 临时存储当前区间的种族名字
+    /** @var string 临时存储当前区间的种族名字 */
     private $_race = null;
 
-    // 临时存储当前正在解析的 Unit 实例
+    /** @var \appsc\models\Unit 临时存储当前正在解析的 Unit 实例 */
     private $_unit = null;    
 
     public function extract()
@@ -207,7 +207,30 @@ class UnitDataParser extends DataParser
             \Yii::error($damage->getErrors());
             throw new \Exception("保存伤害效果失败，请参考日志", 1);            
         }
-    }    
+
+        $this->_updateUnitDamageEffect($damage);
+    }
+
+    // 更新当前 unit 的伤害效果标记
+    private function _updateUnitDamageEffect(Damage $damage){        
+        $name = $this->_unit->name;
+        $effect = Unit::DAMAGE_EFFECT_NORMAL;
+        if ($damage->explosive == 1) {
+            $effect = Unit::DAMAGE_EFFECT_EXPLOSIVE;
+        }else if ($damage->concussive == 1){
+            $effect = Unit::DAMAGE_EFFECT_CONCUSSIVE;
+        }else if ($damage->splash == 1) {
+            $effect = Unit::DAMAGE_EFFECT_SPLASH;
+        }
+        
+        if ($damage->scope == Damage::SCOPE_GROUND) {
+            $this->_unit->groundDamageEffect = $effect;
+            $this->_unit->save();
+        }else{
+            $this->_unit->airDamageEffect = $effect;
+            $this->_unit->save();
+        }
+    }
 
     private function _parseDamageRange(?string $content){
         if ($content == null) return;

@@ -99,6 +99,8 @@ $this->registerJs($js);
                 'value' => function($model) { return BonusHelper::bonusRange($model, 'sight'); }
             ],
             // 'sightBonus',
+            'groundDamageEffect',
+            'airDamageEffect',
             [
                 'attribute' => 'speedBonus',
                 'value' => function ($model) { return BonusHelper::bonusRange($model, 'speed'); }
@@ -114,7 +116,8 @@ $this->registerJs($js);
                             $a .= '&nbsp;|&nbsp;';
                         }
 
-                        $a .= Html::a($damage->scopeNAME, 'javascript:void(0);', ['class' => 'damage-btn', 'value' => $damage->id, 'unit-name' => $model->name]);
+                        $name = $damage->scopeNAME;                        
+                        $a .= Html::a($name, 'javascript:void(0);', ['class' => 'damage-btn', 'value' => $damage->id, 'unit-name' => $model->name]);
                     }
 
                     return $a;

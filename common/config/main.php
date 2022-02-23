@@ -13,6 +13,12 @@ function T($name, $params = []){
     return \Yii::t('app', $name, $params);
 }
 
+/**
+ * 将数组中定义的值进行 i18n 转换，使用统一的描述方式
+ *
+ * @param array $options
+ * @return array
+ */
 function Trans($options) {
     foreach ($options as $key => $value) {
         $options[$key] = TApp($value);

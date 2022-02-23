@@ -42,6 +42,7 @@ return [
     'Times' => '打击次数',
     'Dps' => '每秒伤害(DPS)',
 
+    'Normal' => '普通伤害',
     'Explosive' => '爆炸式伤害',
     'Concussive' => '震荡式伤害',
     'Splash' => '溅射伤害',

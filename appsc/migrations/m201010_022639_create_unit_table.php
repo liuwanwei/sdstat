@@ -36,6 +36,10 @@ class m201010_022639_create_unit_table extends Migration
             'speed' => $this->float()->comment('移动速度值'),
             'speedBonus' => $this->float()->comment('移动速度加强后值'),
 
+            // 对地和对空共有四种效果可选：1 普通，2 震荡，3 爆炸，4 溅射
+            'groundDamageEffect' => $this->integer()->defaultValue(1)->comment('对地攻击效果'),
+            'airDamageEffect' => $this->integer()->defaultValue(1)->comment('对空攻击效果'),
+
             'createdAt' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'updatedAt' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'),
         ]);

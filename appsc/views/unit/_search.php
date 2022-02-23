@@ -24,6 +24,8 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'type')->dropDownList(OptionHelper::addNullOption(Trans(Unit::TYPES), '体积')) ?>
 
+    <?= $form->field($model, 'damageEffect')->dropDownList(OptionHelper::addNullOption(Trans(Unit::DAMAGE_EFFECTS), '所有伤害类型')) ?>
+
     <div class="form-group">
         <?= Html::submitButton(TApp('Search'), ['class' => 'btn btn-primary']) ?>
     </div>

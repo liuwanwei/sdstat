@@ -25,6 +25,8 @@ use Yii;
  * @property int|null $sightBonus 视野加强后值
  * @property float|null $speed 移动速度值
  * @property float|null $speedBonus 移动速度加强后值
+ * @property int $groundDamageEffect 带爆炸式攻击
+ * @property int $airDamageEffect 带震荡式攻击
  * @property string $createdAt
  * @property string $updatedAt
  */
@@ -48,6 +50,18 @@ class Unit extends NamedActiveRecord
         self::FORCE_AIR => 'Air',
     ];
 
+    // groundDamageEffect and airDamageEffect values
+    const DAMAGE_EFFECT_NORMAL      = 1;
+    const DAMAGE_EFFECT_EXPLOSIVE   = 2;
+    const DAMAGE_EFFECT_CONCUSSIVE   = 3;
+    const DAMAGE_EFFECT_SPLASH      = 4;
+    const DAMAGE_EFFECTS = [
+        self::DAMAGE_EFFECT_NORMAL => 'Normal',
+        self::DAMAGE_EFFECT_EXPLOSIVE => 'Explosive',
+        self::DAMAGE_EFFECT_CONCUSSIVE => 'Concussive',
+        self::DAMAGE_EFFECT_SPLASH => 'Splash',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -67,7 +81,7 @@ class Unit extends NamedActiveRecord
     {
         return [
             [['race', 'name', 'type', 'force'], 'required'],
-            [['type', 'force', 'mineCost', 'gasCost', 'timeCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus'], 'integer'],
+            [['type', 'force', 'mineCost', 'gasCost', 'timeCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus', 'groundDamageEffect', 'airDamageEffect'], 'integer'],
             [['unitCost', 'speed', 'speedBonus'], 'number'],
             [['createdAt', 'updatedAt'], 'safe'],
             [['race'], 'string', 'max' => 255],
@@ -98,6 +112,9 @@ class Unit extends NamedActiveRecord
             'sightBonus' => TApp('Sight Bonus'),
             'speed' => TApp('Speed'),
             'speedBonus' => TApp('Speed Bonus'),
+
+            'groundDamageEffect' => TApp('Ground Damage Deffect'),
+            'airDamageEffect' => TApp('Air Damage Deffect'),
 
             'createdAt' => TApp('Created At'),
             'updatedAt' => TApp('Updated At'),
