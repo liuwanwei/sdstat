@@ -4,7 +4,9 @@ return [
     'Login' => '登录',
     'Admin' => '管理',
 
-    'Units' => '单位',
+    'Units' => '兵种',
+    'Buildings' => '建筑',
+
     'P' => '神族',
     'T' => '人族',
     'Z' => '虫族',
@@ -79,13 +81,16 @@ return [
     'Mine Cost' => '消耗水晶',
     'Gas Cost' => '消耗费气',
     'Time Cost' => '升级时间',
-    'Building' => '升级建筑',
+    'Building' => '建筑',
 
     'Ground Damage' => '对地伤害',
     'Air Damage' => '对空伤害',    
     'Damage Attributes' => '伤害属性',
     'Ground Damage Range' => '对地攻击距离',
     'Air Damage Range' => '对空攻击距离',
+
+    'Cast Range' => '施法距离',
+    'Detect Range' => '探测距离',
 
     'Special Damage Attributes' => '特殊伤害属性',
 

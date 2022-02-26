@@ -47,22 +47,27 @@ $this->registerJs($js);
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($model){
-                    $title = "{$model->race} " . TApp($model->name) . " ($model->unitCost)";
-                    return Html::a($title, ['view', 'id' => $model->id]);
+                    if ($model->category == Unit::CATEGORY_UNIT) {
+                        $title = "{$model->race} " . TApp($model->name) . " ($model->unitCost)";
+                        return Html::a($title, ['view', 'id' => $model->id]);                 
+                    }else{
+                        $title = "{$model->race} " . TApp($model->name);
+                        return Html::a($title, ['view', 'id' => $model->id], ['color' => 'red']);
+                    }                       
                 }
             ],
             // 'typeNAME',
             [
                 'attribute' => 'type',
                 'value' => function($model) {
-                    return Trans(Unit::TYPES)[$model->type];
+                    return $model->type ? Trans(Unit::TYPES)[$model->type] : '';
                 }
             ],
             // 'forceNAME',
             [
                 'attribute' => 'force',
                 'value' => function ($model) {
-                    return Trans(Unit::FORCES)[$model->force];
+                    return $model->force ? Trans(Unit::FORCES)[$model->force] : '';
                 }
             ],
             [

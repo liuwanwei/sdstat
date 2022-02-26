@@ -13,10 +13,10 @@ use Yii;
 class UnitDataParser extends DataParser
 {    
     /** @var string 临时存储当前区间的种族名字 */
-    private $_race = null;
+    protected $_race = null;
 
     /** @var \appsc\models\Unit 临时存储当前正在解析的 Unit 实例 */
-    private $_unit = null;    
+    protected $_unit = null;    
 
     public function extract()
     {
@@ -60,6 +60,7 @@ class UnitDataParser extends DataParser
         if (empty($unit)) {
             $unit = new Unit();
             $unit->name = $name;
+            $unit->category = Unit::CATEGORY_UNIT;
         }
 
         $this->_unit = $unit;
@@ -81,17 +82,17 @@ class UnitDataParser extends DataParser
             throw new \Exception("保存 unit 失败", 1);
         }
 
-        $this->_parseSight($lineItems['R']);
-        $this->_parseSpeed($lineItems['S']);
+        $this->parseSight($lineItems['R']);
+        $this->parseSpeed($lineItems['S']);
 
-        $this->_parseDamageValue($lineItems['L']);
-        $this->_parseDamageEffects($lineItems['M']);
-        $this->_parseDamageRange($lineItems['N']);
-        $this->_parseDamageCooldown($lineItems['O']);
-        $this->_parseDamageDps($lineItems['P']);
+        $this->parseDamageValue($lineItems['L']);
+        $this->parseDamageEffects($lineItems['M']);
+        $this->parseDamageRange($lineItems['N']);
+        $this->parseDamageCooldown($lineItems['O']);
+        $this->parseDamageDps($lineItems['P']);
 
-        $this->getGD()->save();
-        $this->getAD()->save();
+        $this->saveGD();
+        $this->saveAD();
 
         return true;
     }
@@ -113,7 +114,7 @@ class UnitDataParser extends DataParser
      * @param string $content
      * @return void
      */
-    private function _parseDamageValue(?string $content){
+    protected function parseDamageValue(?string $content){
         if($content == null) return;
 
         // 对地对空数值是否一样
@@ -175,7 +176,7 @@ class UnitDataParser extends DataParser
     }    
 
     // 解析 Exp/Con/Spl 字段
-    private function _parseDamageEffects(?string $content){
+    protected function parseDamageEffects(?string $content){
         if ($content == null) return;
 
         $identical = strchr($content, '|') ? false : true;
@@ -232,7 +233,7 @@ class UnitDataParser extends DataParser
         }
     }
 
-    private function _parseDamageRange(?string $content){
+    protected function parseDamageRange(?string $content){
         if ($content == null) return;
 
         // 对地对空数值是否一样
@@ -266,7 +267,7 @@ class UnitDataParser extends DataParser
         }
     }
 
-    private function _parseDamageCooldown(?string $content){
+    protected function parseDamageCooldown(?string $content){
         if ($content == null) return;
 
         $identical = strchr($content, '|') ? false : true;
@@ -287,7 +288,7 @@ class UnitDataParser extends DataParser
 
     
 
-    private function _parseDamageDps(?string $content) {
+    protected function parseDamageDps(?string $content) {
         if ($content == null) return;
 
         $identical = strchr($content, '|') ? false : true;
@@ -306,7 +307,7 @@ class UnitDataParser extends DataParser
         }
     }    
 
-    private function _parseSight(?string $content){
+    protected function parseSight(?string $content){
         if ($content == null) return;
 
         list($base, $bonus) = $this->_parseBonusContent($content);
@@ -317,9 +318,9 @@ class UnitDataParser extends DataParser
             \Yii::error($unit->getErrors());
             throw new \Exception("保存视野失败", 1);
         }
-    }
+    }    
 
-    private function _parseSpeed(?string $content){
+    protected function parseSpeed(?string $content){
         if ($content == null) return;
 
         list($base, $bonus) = $this->_parseBonusContent($content);
@@ -330,6 +331,14 @@ class UnitDataParser extends DataParser
             \Yii::error($unit->getErrors());
             throw new \Exception("保存速度失败", 1);
         }
+    }
+
+    protected function parseCastRange(?string $content){
+        // TODO: 
+    }
+
+    protected function parseDetectRange(?string $content){
+        // TODO: 
     }
 
     /**

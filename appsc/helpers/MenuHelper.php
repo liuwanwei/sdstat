@@ -12,7 +12,7 @@ class MenuHelper{
 
         $menus = [
             ['label' => TApp('Units'), 'url' => ['/unit/index']],
-            ['label' => TApp('Buildings'), 'url' => ['/building/index']],
+            // ['label' => TApp('Buildings'), 'url' => ['/building/index']],
             [
                 'label' => '排行榜',
                 'items' => [

@@ -2,24 +2,18 @@
 
 namespace appsc\helpers\excel;
 
-use appsc\models\{Building, Damage};
+use appsc\models\{Unit, Damage};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Yii;
 
 /**
  * 从 worksheet 中解析种族单位数据
  */
-class BuildingDataParser extends DataParser
+class BuildingDataParser extends UnitDataParser
 {    
-    // 临时存储当前区间的种族名字
-    private $_race = null;
-
-    // 临时存储当前正在解析的 Unit 实例
-    private $_building = null;
-
     public function extract()
     {
-        $sheet = $this->getWorkSheetAtIndex(3);
+        $sheet = $this->getWorkSheetAtIndex(1);
         return $this->extractBuildings($sheet);
     }
 
@@ -40,6 +34,12 @@ class BuildingDataParser extends DataParser
         return $count;
     }
 
+    /**
+     * 解析一行数据
+     *
+     * @param array $lineItems
+     * @return boolean 成功时返回 true，解析会继续进行下去；失败时返回 false，解析停止
+     */
     private function _parseLine(array $lineItems) {
         $race = $lineItems['A'];
         if (! in_array($race, ['P', 'T', 'Z', ''])) {
@@ -50,18 +50,23 @@ class BuildingDataParser extends DataParser
         $race =  $race ?? $this->_race;
 
         if (empty($race)) {
-            throw new \Exception("无法找到种族，停止解析", 1);
+            return false;
         }
         $this->_race = $race;
 
         $name = $lineItems['B'];
-        $unit = Building::findOne(['name' => $name]);
-        if (empty($unit)) {
-            $unit = new Building();
-            $unit->name = $name;
+        if (empty($name)) {
+            return false;
         }
 
-        $this->_building = $unit;
+        $unit = Unit::findOne(['name' => $name]);
+        if (empty($unit)) {
+            $unit = new Unit();
+            $unit->name = $name;
+            $unit->category = Unit::CATEGORY_BUILDING;
+        }
+
+        $this->_unit = $unit;
 
         $unit->race = $race;
         $unit->mineCost = $lineItems['C'];
@@ -71,18 +76,30 @@ class BuildingDataParser extends DataParser
         $unit->hp = $lineItems['F'];
         $unit->shield = $lineItems['G'];
         $unit->armor = $lineItems['H'];
-        $unit->energy = $lineItems['I'];
+        $unit->energy = $lineItems['I'];        
+
+        $this->parseSight($lineItems['O']);
+        $this->parseCastRange($lineItems['P']);
+        // TODO: 探测距离，unit 中的 observer、overload 也需要
+        $this->parseDetectRange($lineItems['Q']);        
+
+        // FIXME: sunkey colony 是从 Crreep Colony 变来的，记得添加
 
         if (! $unit->save()) {
-            \Yii::error($unit->getErrors());
-            throw new \Exception("保存 unit 失败", 1);
+            $errors = $unit->getErrors();
+            $msg = print_r($errors, true);
+            throw new \Exception("保存 building 失败: {$msg}", 0);
         }
 
-        // $this->_parseDamageValue($lineItems);
-        // $this->_parseDamageEffects($lineItems);
-        // $this->_parseDamageRange($lineItems);
-        // $this->_parseDamageCooldown($lineItems);
-        // $this->_parseDamageDps($lineItems);
+        // 解析伤害要放到最后进行，因为需要填充 Damage.unitId
+        $this->parseDamageValue($lineItems['J']);
+        $this->parseDamageEffects($lineItems['K']);
+        $this->parseDamageRange($lineItems['L']);
+        $this->parseDamageCooldown($lineItems['M']);
+        $this->parseDamageDps($lineItems['N']);
+
+        $this->saveGD();
+        $this->saveAD();
 
         return true;
     }

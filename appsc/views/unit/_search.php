@@ -20,6 +20,8 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'race')->dropDownList(OptionHelper::addNullOption(Trans(Unit::RACES), '种族')) ?>
 
+    <?= $form->field($model, 'category')->dropDownList(OptionHelper::addNullOption(Trans(Unit::CATEGORIES), '类型')) ?>
+
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'type')->dropDownList(OptionHelper::addNullOption(Trans(Unit::TYPES), '体积')) ?>

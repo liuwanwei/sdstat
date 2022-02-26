@@ -22,7 +22,7 @@ class UnitSearch extends Unit
     public function rules()
     {
         return [
-            [['id', 'type', 'force', 'mineCost', 'gasCost', 'timeCost', 'unitCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus', 'damageEffect'], 'integer'],
+            [['id', 'category', 'type', 'force', 'mineCost', 'gasCost', 'timeCost', 'unitCost', 'hp', 'shield', 'armor', 'sight', 'sightBonus', 'damageEffect'], 'integer'],
             [['race', 'name', 'energy', 'createdAt', 'updatedAt'], 'safe'],
             [['speed', 'speedBonus'], 'number'],
             [['mode'], 'safe'],
@@ -65,6 +65,7 @@ class UnitSearch extends Unit
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'category' => $this->category,
             'type' => $this->type,
             'force' => $this->force,
             'mineCost' => $this->mineCost,

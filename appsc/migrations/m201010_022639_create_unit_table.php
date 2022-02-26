@@ -15,10 +15,11 @@ class m201010_022639_create_unit_table extends Migration
     {
         $this->createTable('{{%unit}}', [
             'id' => $this->primaryKey(),
+            'category' => $this->integer()->notNull()->comment('0unit1building'),
             'race' => $this->string()->notNull()->comment('P T Z'),
             'name' => $this->string(32)->notNull(),
-            'type' => $this->integer()->notNull()->comment('0Small 1Medium 2Large'),
-            'force' => $this->integer()->notNull()->comment('0Ground 1Air'),
+            'type' => $this->integer()->comment('1Small 2Medium 3Large'),
+            'force' => $this->integer()->comment('1Ground 2Air'),
 
             'mineCost' => $this->integer(),
             'gasCost' => $this->integer(),
@@ -35,6 +36,9 @@ class m201010_022639_create_unit_table extends Migration
             'sightBonus' => $this->integer(0)->comment('视野加强后值'),
             'speed' => $this->float()->comment('移动速度值'),
             'speedBonus' => $this->float()->comment('移动速度加强后值'),
+
+            'castRange' => $this->integer()->comment('施法距离'),
+            'detectRange' => $this->integer()->comment('探测距离'),
 
             // 对地和对空共有四种效果可选：1 普通，2 震荡，3 爆炸，4 溅射
             'groundDamageEffect' => $this->integer()->defaultValue(1)->comment('对地攻击效果'),

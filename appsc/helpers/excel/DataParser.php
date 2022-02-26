@@ -77,8 +77,20 @@ class DataParser extends ExcelParser{
         return $this->_gd;
     }
 
+    protected function saveGD(){
+        if ($this->_gd) {
+            $this->_gd->save();
+        }
+    }
+
     protected function getAD(){
         return $this->_ad;
+    }
+
+    protected function saveAD(){
+        if ($this->_ad){
+            $this->_ad->save();
+        }
     }
 
     protected function getDamage(int $scope){
