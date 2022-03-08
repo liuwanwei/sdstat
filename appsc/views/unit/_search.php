@@ -22,8 +22,6 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'category')->dropDownList(OptionHelper::addNullOption(Trans(Unit::CATEGORIES), '类型')) ?>
 
-    <?= $form->field($model, 'name') ?>
-
     <?= $form->field($model, 'type')->dropDownList(OptionHelper::addNullOption(Trans(Unit::TYPES), '体积')) ?>
 
     <?= $form->field($model, 'damageEffect')->dropDownList(OptionHelper::addNullOption(Trans(Unit::DAMAGE_EFFECTS), '所有伤害类型')) ?>
