@@ -21,10 +21,8 @@ class MenuHelper{
             ],
             [
                 'label' => '星际知识',
-                'items' => [
-                    ['label' => '伤害计算', 'url' => ['/doc/damage.html'], 'linkOptions' => ['target' => 'blank']],
-                    ['label' => '韩国选手ID', 'url' => ['/doc/players.html'], 'linkOptions' => ['target' => 'blank']]
-                ],
+                'url' => ['/scdoc/index.html'],
+                'linkOptions' => ['target' => 'blank']
             ],
         ];
         
