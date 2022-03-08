@@ -2,6 +2,7 @@
 
 namespace appsc\helpers\excel;
 
+use appsc\helpers\DamageHelper;
 use appsc\models\Damage;
 use appsc\models\Unit;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -16,7 +17,12 @@ class UnitDataParser extends DataParser
     protected $_race = null;
 
     /** @var \appsc\models\Unit 临时存储当前正在解析的 Unit 实例 */
-    protected $_unit = null;    
+    protected $_unit = null;
+
+    /** @var int 需要针对某一行数据进行读写时才需要设置 */
+    public $debugLineNumber = null;
+    /** @var string 针对一行进行读取时，由于 $this->_race 依赖上下文，无法在单行测试时读取到，所以需要设置当前种族 */
+    public $debugLineRace = null;
 
     public function extract()
     {
@@ -30,6 +36,19 @@ class UnitDataParser extends DataParser
         $line = 0;
         foreach ($iterator as $row) {
             $line ++;
+
+            $this->clearDamageCache();
+
+            // 如果 DEBUG 时设置只解析一行，解析完成后跳出循环
+            if ($this->debugLineNumber != null) {
+                $this->_race = $this->debugLineRace;
+                if ($line < $this->debugLineNumber) {
+                    continue;
+                }else if ($line > $this->debugLineNumber) {
+                    break;
+                }
+            }
+
             $items = $this->getRowArray($row, $sheet);
             if(! $this->_parseLine($items)){
                 continue;
@@ -117,6 +136,8 @@ class UnitDataParser extends DataParser
     protected function parseDamageValue(?string $content){
         if($content == null) return;
 
+        $gd = $ad = null;
+
         // 对地对空数值是否一样
         $identical = strchr($content, '|') ? false : true;
         if ($identical) {
@@ -133,9 +154,16 @@ class UnitDataParser extends DataParser
         $this->setDamage($ad, Damage::SCOPE_AIR);
     }
 
-    // 解析独立的对地或对空攻击力定义
+    /**
+     * 解析独立的对地或对空攻击力定义
+     *
+     * @param string|null $content
+     * @param integer $scope
+     * @return Damage|null
+     */
     private function _createDamageRecord(?string $content, int $scope){
         if ($content == '0') {
+            // 如果值为 0，代表没有此种类型的攻击
             return null;
         }
 
@@ -274,15 +302,16 @@ class UnitDataParser extends DataParser
         if ($identical) {
             // 没有空地分隔符，可能只有其一，或者都有，取决于之前是否创建过对应的空地伤害记录
             list($base, $bonus) = $this->_parseBonusContent($content);
-            $this->getGD()->updateCooldown($base, $bonus);
-            $this->getAD()->updateCooldown($base, $bonus);
+            DamageHelper::updateCooldown($this->getGD(), $base, $bonus);
+            DamageHelper::updateCooldown($this->getAD(), $base, $bonus);
+            
         }else{
             // “空-地” 分开，所以之前必须创建过两条空地伤害记录
             $parts = explode('|', $content);
             list($base, $bonus) = $this->_parseBonusContent($parts[0]);
-            $this->getGD()->updateCooldown($base, $bonus);
+            DamageHelper::updateCooldown($this->getGD(), $base, $bonus);
             list($base, $bonus) = $this->_parseBonusContent($parts[1]);
-            $this->getAD()->updateCooldown($base, $bonus);
+            DamageHelper::updateCooldown($this->getAD(), $base, $bonus);
         }
     }
 
@@ -295,15 +324,15 @@ class UnitDataParser extends DataParser
         if ($identical) {
             // 没有空地分隔符，可能只有其一，或者都有，取决于之前是否创建过对应的空地伤害记录
             list($base, $bonus) = $this->_parseBonusContent($content);
-            $this->getGD()->updateDps($base, $bonus);
-            $this->getAD()->updateDps($base, $bonus);
+            DamageHelper::updateDps($this->getGD(), $base, $bonus);
+            DamageHelper::updateDps($this->getAD(), $base, $bonus);
         }else{
             // 空地分开，所以之前必须创建过两条空地伤害记录
             $parts = explode('|', $content);
             list($base, $bonus) = $this->_parseBonusContent($parts[0]);
-            $this->getGD()->updateDps($base, $bonus);
+            DamageHelper::updateDps($this->getGD(), $base, $bonus);
             list($base, $bonus) = $this->_parseBonusContent($parts[1]);
-            $this->getAD()->updateDps($base, $bonus);
+            DamageHelper::updateDps($this->getAD(), $base, $bonus);
         }
     }    
 

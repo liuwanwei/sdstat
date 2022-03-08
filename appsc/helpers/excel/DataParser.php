@@ -93,6 +93,11 @@ class DataParser extends ExcelParser{
         }
     }
 
+    protected function clearDamageCache(){
+        $this->_ad = null;
+        $this->_gd = null;
+    }
+
     protected function getDamage(int $scope){
         if ($scope == Damage::SCOPE_GROUND) {
             return $this->_gd;

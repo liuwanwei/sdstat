@@ -16,6 +16,8 @@ use kartik\widgets\ActiveForm;
         'type' => ActiveForm::TYPE_INLINE,
     ]); ?>
 
+    <?php echo $form->field($model, 'id') ?>
+
     <?= $form->field($model, 'unitName') ?>
 
     <?php // echo $form->field($model, 'times') ?>

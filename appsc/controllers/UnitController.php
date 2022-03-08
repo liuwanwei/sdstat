@@ -151,6 +151,8 @@ class UnitController extends Controller
      */ 
     public function actionImport(){
         $parser = new UnitDataParser();
+        // $parser->debugLineNumber = 18;
+        // $parser->debugLineRace = "T";
         $count = $parser->extract();
         \Yii::$app->session->setFlash('success', "共解析 {$count} 个单位");
         $this->redirect(\Yii::$app->request->referrer);
