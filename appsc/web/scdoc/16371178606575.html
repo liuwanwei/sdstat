@@ -1,0 +1,582 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  伤害计算公式 - 星际争霸-重制版
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="星际争霸-重制版" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">星际争霸-重制版</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 星际争霸-重制版</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>伤害计算</label></li>
+
+          
+            <li><a title="溅射式伤害" href="16467260263551.html">溅射式伤害</a></li>
+          
+            <li><a title="爆炸式伤害" href="16467256084741.html">爆炸式伤害</a></li>
+          
+            <li><a title="震荡式伤害" href="16467246867903.html">震荡式伤害</a></li>
+          
+            <li><a title="伤害计算公式" href="16371178606575.html">伤害计算公式</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>兵种特性</label></li>
+
+          
+            <li><a title="种族差异" href="16416191710276.html">种族差异</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>伤害计算</span></li>
+                        
+                          <li><a title="溅射式伤害" href="16467260263551.html">溅射式伤害</a></li>
+                        
+                          <li><a title="爆炸式伤害" href="16467256084741.html">爆炸式伤害</a></li>
+                        
+                          <li><a title="震荡式伤害" href="16467246867903.html">震荡式伤害</a></li>
+                        
+                          <li><a title="伤害计算公式" href="16371178606575.html">伤害计算公式</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>兵种特性</span></li>
+                        
+                          <li><a title="种族差异" href="16416191710276.html">种族差异</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>伤害计算公式</h1>
+
+<div class="mweb_toc"><ul>
+<li><a href="#1%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6">1. 前提条件</a>
+<ul>
+<li><a href="#1-1%E4%BC%A4%E5%AE%B3%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6">1.1 伤害产生条件</a></li>
+<li><a href="#1-2%E8%AE%A1%E7%AE%97%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D">1.2 计算参数介绍</a></li>
+</ul>
+</li>
+<li><a href="#2%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B">2. 计算过程</a>
+<ul>
+<li><a href="#2-1%E5%9F%BA%E7%A1%80%E4%BC%A4%E5%AE%B3">2.1 基础伤害</a></li>
+<li><a href="#2-2%E9%9C%87%E8%8D%A1%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F">2.2 震荡式攻击消减</a></li>
+<li><a href="#2-3%E7%88%86%E7%82%B8%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F">2.3 爆炸式攻击消减</a></li>
+</ul>
+</li>
+<li><a href="#3%E5%AE%8C%E6%95%B4%E4%BC%A4%E5%AE%B3%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F">3. 完整伤害计算公式</a></li>
+</ul>
+</div>
+<h2><a id="1%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 前提条件</h2>
+<h3><a id="1-1%E4%BC%A4%E5%AE%B3%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 伤害产生条件</h3>
+<p>假设兵种 X 攻击 Y，只有下面两种情况下会产生伤害：</p>
+<ul>
+<li>X 具备对地攻击能力，Y 是地面单位</li>
+<li>X 具备对空攻击能力，Y 是飞行单位</li>
+<li>伤害最终结果必须是<strong>整数</strong>，所以在计算出最终结果后，还需要<strong>四舍五入</strong>，才得到最终值</li>
+<li>伤害最低为 1 点，低于 1 点时，攻击两次产生 1 点伤害</li>
+</ul>
+<h3><a id="1-2%E8%AE%A1%E7%AE%97%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 计算参数介绍</h3>
+<p>基础伤害参数：</p>
+<ul>
+<li>Damage: 攻击力，也就是选中某个兵种后，鼠标放到攻击图标上显示的值，每升级一次增加值不等；</li>
+<li>Defense: 防御值，同上，每升级一次该值增加 1；</li>
+<li>ShieldDefense: 护盾防御值，仅神族有；</li>
+<li>Attacks: 攻击次数，只有少量兵种是按照两次攻击计算伤害，如神族的狂热者，人族的机器人、瓦格雷。</li>
+</ul>
+<p>关于 Attacks 的特别说明，以狂热者为例：</p>
+<ul>
+<li>狂热者面板上攻击力是 16</li>
+<li>在计算伤害时，实际按照 8x2 来算，每把光刀 8 点攻击力再乘以 2</li>
+<li>升级 1 攻后，面板攻击力变为 18，实际上是每把光刀攻击力升级到了 9，再乘以 2 得到 18</li>
+<li>如果对手有 1 防，实际伤害就得以单把光刀独立计算，最后再乘以 2：(9 - 1)x2 = 16，而不是 (18 - 1) = 17</li>
+</ul>
+<p>特殊伤害标志：</p>
+<ul>
+<li>Explosive: 爆炸式伤害标志</li>
+<li>Concussive: 震荡式伤害标志</li>
+<li>Splash: 溅射伤害标志</li>
+</ul>
+<h2><a id="2%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. 计算过程</h2>
+<p>由于最终造成的伤害需要综合考虑双方的攻防等级、伤害类型、单位大小类型等，所以下面从简单到复杂，逐步推出完整的伤害计算公式。</p>
+<h3><a id="2-1%E5%9F%BA%E7%A1%80%E4%BC%A4%E5%AE%B3" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.1 基础伤害</h3>
+<p>对于人族和虫族，伤害会直接削减生命；对于神族，会首先削减护盾，护盾值削减到 0 以后，才会继续削减生命。</p>
+<p>对生命值的基础伤害：<br />
+( X.Damage - Y.Defence ) * X.Attacks</p>
+<p>对护盾的基础伤害（Y.Race == Protoss）：<br />
+( X.Damage - Y.ShieldDefense ) * X.Attacks</p>
+<p><strong>注意：对护盾的伤害不受震荡式、爆炸式参数的影响，绝对造成全伤害。</strong></p>
+<h3><a id="2-2%E9%9C%87%E8%8D%A1%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.2 震荡式攻击消减</h3>
+<p>震荡式攻击对中型和大型单位会被弱化，可以理解为越大越 “震不动”。</p>
+<p>X 必须是下列单位之一：</p>
+<ul>
+<li>火兵 Firebat</li>
+<li>雷车 Vulture</li>
+<li>幽灵 Ghost</li>
+</ul>
+<p>Y.type 对应的震荡伤害系数（Y.Concussive）分别是：</p>
+<ul>
+<li>小型单位： 1</li>
+<li>中型单位： 0.5</li>
+<li>大型单位: 0.25</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>震荡系数</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小型</td>
+<td>1</td>
+<td>Z: 小狗、飞龙、自杀；P：狂热者、电兵；T：火兵、机枪兵、医生、鬼兵。</td>
+</tr>
+<tr>
+<td>中型</td>
+<td>0.5</td>
+<td>Z: 口水、潜伏者、蝎子、皇后；P：海盗船；T：雷车</td>
+</tr>
+<tr>
+<td>大型</td>
+<td>0.25</td>
+<td>Z：房子、守护者、吞噬者、大牛；P：龙骑、金甲、白球、红球、运输机、哒哒哒；T：坦克、机器人、所有空军</td>
+</tr>
+</tbody>
+</table>
+<p>对生命造成的伤害公式：</p>
+<ul>
+<li>( X.Damage - Y.Defence ) * Y.Concussive * X.Attacks</li>
+</ul>
+<p>对神族护盾造成的伤害没有变化，全伤害。</p>
+<p>例: 狂热者 vs 狗（35生命）需要几下才能打死？</p>
+<ul>
+<li>0 攻打 0 防：(8 - 0) x 1 x 2 = 16，三下</li>
+<li>1 攻打 0 防，(9 - 0) x 1 x 2 = 18，<strong>两下</strong></li>
+<li>1 攻打 1 防，(9 - 1) x 1 x 2 = 16，三下</li>
+<li>2 攻打 1 防，(10 - 1) x 1 x 2 = 18，<strong>两下</strong></li>
+<li>2 攻打 2 防，(10 - 2) x 1 x 2 = 16，三下</li>
+</ul>
+<p>所以攻防领先很占优势。</p>
+<h3><a id="2-3%E7%88%86%E7%82%B8%E5%BC%8F%E6%94%BB%E5%87%BB%E6%B6%88%E5%87%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.3 爆炸式攻击消减</h3>
+<p>爆炸式攻击对小型、中型单位有弱化作用，可以理解为越小越 “炸不着”。</p>
+<p>X 必须是下列单位：</p>
+<ul>
+<li>坦克（攻城模式下，俗称 “架起来”)</li>
+<li>龙骑</li>
+<li>刺蛇</li>
+<li>人族防空塔</li>
+<li>虫族对地地堡</li>
+</ul>
+<p>Y.type 对应的爆炸伤害系数 (Y.Explosive) 分别是：</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>爆炸系数</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小型</td>
+<td>0.5</td>
+<td>Z: 小狗、飞龙、自杀；P：狂热者、电兵；T：火兵、机枪兵、医生、鬼兵。</td>
+</tr>
+<tr>
+<td>中型</td>
+<td>0.75</td>
+<td>Z: 口水、潜伏者、蝎子、皇后；P：海盗船；T：雷车</td>
+</tr>
+<tr>
+<td>大型</td>
+<td>1</td>
+<td>Z：房子、守护者、吞噬者、大牛；P：龙骑、金甲、白球、红球、运输机、哒哒哒；T：坦克、机器人、所有空军</td>
+</tr>
+</tbody>
+</table>
+<p>爆炸攻击对生命造成伤害的计算公式为：</p>
+<ul>
+<li>( X.Damage - Y.Defence ) * Y.Explosive * X.Attacks</li>
+</ul>
+<p>举例：</p>
+<table>
+<thead>
+<tr>
+<th>攻击单位</th>
+<th>攻击目标</th>
+<th>目标类型</th>
+<th>伤害值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sunken</td>
+<td>Zealot</td>
+<td>小单位</td>
+<td>(40 - 1) x 0.5 + 0.5 = 20</td>
+</tr>
+<tr>
+<td>Sunken</td>
+<td>Tank</td>
+<td>大单位</td>
+<td>(40 - 1) x 1 + 0.5 = 39.5，取整后 39</td>
+</tr>
+<tr>
+<td>SiegeTank</td>
+<td>Zealot</td>
+<td>小单位</td>
+<td>(85 - 60 - 1) x 0.5 = 12，一炮后剩 88 点生命</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="3%E5%AE%8C%E6%95%B4%E4%BC%A4%E5%AE%B3%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 完整伤害计算公式</h2>
+<p>由于震荡式攻击和爆炸式攻击不会同时存在，将它们造成的影响统称为 <strong>Y.TypeFactor</strong>。</p>
+<p>另外，完整伤害计算公式考虑了双方攻防对结果的影响。</p>
+<ul>
+<li>假定 X 的伤害升级后最终值为 FinalDamage，</li>
+<li>同时 Y 的防御升级后最终值为 FinalDefense，包坦克、狂热者等自带的 1 防，大牛通过牛塔升级的 2 防等</li>
+</ul>
+<p>完整伤害计算公式，记得四舍五入：</p>
+<ul>
+<li>(X.FinalDamage - Y.FinalDefense) * Y.TypeFactor * X.Attacks</li>
+</ul>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="16416191710276.html"  title="Previous Post: 种族差异">&laquo; 种族差异</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '16371178606575.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0.4em 0;padding: 0;}
+  figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+
+</style>
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+
+
+  </body>
+</html>
